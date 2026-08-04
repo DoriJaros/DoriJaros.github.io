@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Roster Roller Coaster — Dorota Jarošová</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<header class="bar">
+  <a class="bar-name" href="index.html">Dorota Jarošová</a>
+  <nav class="bar-links">
+    <a href="index.html#work">Work</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <section class="panel panel--page">
+    <h1 class="panel-title">The Roster Roller Coaster</h1>
+
+    <p class="case-intro">AristoTelos is a workforce management system used by thousands of employees and their managers in companies like Albert, T&#8209;Mobile, Innogy and Sconto. At its core is the roster, a personal work calendar. I inherited the old mobile app and rebuilt it from scratch, solo, end to end: research, IA, interaction design, spec.</p>
+
+    <div class="case">
+      <div class="case-row">
+        <div class="case-col">
+          <div class="case-block">
+            <h2 class="case-h">What I was given</h2>
+            <p>A raw data table. Information exported from a database and handed to a user with no further thought. The real problem wasn't the interface. The app was organized around how the system stores data, but ordinary employees don't care about data.</p>
+          </div>
+          <p class="case-quote">&ldquo;Can we go fishing this weekend, or do you have to work?&rdquo;</p>
+          <div class="case-block">
+            <p>Answering that should take two seconds. What users care about is their time in and outside of work. The moment you frame it that way, the real problem becomes obvious: the app had no concept of the person using it.</p>
+            <p>I reframed the whole thing around a single question: am I working, and what does my week look like? That made the day the primary unit, and suddenly the real design problems became visible.</p>
+          </div>
+        </div>
+        <div class="figure figure--tall">The old app - raw data table</div>
+      </div>
+
+      <div class="case-row">
+        <div class="case-col">
+          <div class="case-block">
+            <h2 class="case-h">Turns out, a day at work is complicated</h2>
+            <p>A shift isn't just a block of time. It carries activities, parallel activities, mandatory and flexible breaks, multiple absence types, with meaningful differences between them that payroll absolutely cares about. Pending requests, approved ones, denied ones, manager notes, labels, legal warnings.</p>
+            <p>The user base runs the full spectrum: HR managers on one end, warehouse workers opening a work app for the first time on the other. The design had to work for both.</p>
+          </div>
+          <div class="case-block">
+            <h2 class="case-h">The goal</h2>
+            <p>Give people a calendar. Something they can open and scan in seconds. At the same time, keep the roster as a reliable source of truth, where users can find everything about their shifts when they need to go deep.</p>
+          </div>
+        </div>
+        <div class="figure">Everything a single shift can contain - the map</div>
+      </div>
+
+      <div class="case-row">
+        <div class="case-col">
+          <div class="case-block">
+            <h2 class="case-h">The process</h2>
+            <p>I mapped everything a single shift could possibly contain. Found shifts whose composition was worse than your worst nightmare and designed for those first. Setting priorities was the key: what does a person actually need to see at a glance, and what can wait until they ask for it?</p>
+          </div>
+          <p class="case-aside">Fun fact: forklift operators are legally required to take a&nbsp;five-minute break every thirty minutes, no&nbsp;exceptions.</p>
+          <div class="case-block">
+            <p>And that broke the timeline. Shifts with parallel activities and five-minute breaks recurring hourly throughout the day made a conventional timeline unreadable: too dense to scan, and too fragile to scale.</p>
+          </div>
+        </div>
+        <div class="figure figure--tall">Why the timeline broke</div>
+      </div>
+
+      <div class="case-row">
+        <div class="case-col">
+          <div class="case-block">
+            <h2 class="case-h">The solution</h2>
+            <p>Hide the complexity, keep it for later, highlight the time aspect users understand and need. So the day, the main unit, became the main component. It has two states.</p>
+            <p><strong>Collapsed</strong>, for scanning the whole month. On the left, a calendar for orientation in time: date, day of week, holidays highlighted. Same for everyone. On the right, the essentials: when you work, what you'll be doing, absences, total hours. Plus a signal when something needs attention, so you can tell a shift you've worked a thousand times apart from one that isn't routine. Enough to orient. Not enough to overwhelm.</p>
+            <p><strong>Expanded</strong> holds everything a shift can contain: properties, tags, manager notes, requests, the full schedule. There when you need to go deeper, invisible when you don't.</p>
+          </div>
+        </div>
+        <div class="figure figure--tall">Day component - collapsed and expanded</div>
+      </div>
+
+      <div class="case-row">
+        <div class="case-col">
+          <div class="case-block">
+            <p>When the timeline failed, content categories emerged from how users actually think about their time:</p>
+          </div>
+          <dl class="case-qa">
+            <dt>When do I work and when don't I?</dt>
+            <dd>Day flow: main activities, breaks, absences.</dd>
+            <dt>Do I have anything extra to do?</dt>
+            <dd>Parallel activities.</dd>
+            <dt>Am I working more than usual?</dt>
+            <dd>Overtime.</dd>
+            <dt>Anything else?</dt>
+            <dd>Labels, most commonly home office.</dd>
+          </dl>
+          <div class="case-block">
+            <p>That hierarchy became the backbone of the visual solution. And while a regular roster looks like the one above, this structure is built to hold even horror shifts.</p>
+          </div>
+        </div>
+        <div class="figure figure--tall">Component architecture</div>
+      </div>
+
+      <div class="case-row">
+        <div class="case-col">
+          <div class="case-block">
+            <p>The roster isn't read-only. From any shift, an employee can raise a request, offer it for swap to a fellow coworker, or leave a note for a manager. A floating action button extends the same actions to date ranges, so a five-day vacation takes setting up one request instead of five.</p>
+            <p>Attendance state is also reflected. Closed attendance, in the past: shifts that have already happened and can't be changed, though in some companies employees are still required to review and confirm them before payroll is processed. Open attendance, the current period, live and actionable. Unpublished attendance, in the future: shifts prescribed according to rules, suggestions rather than commitments, placed before final planning happens. The same component looks different depending on which state it's in, but does not lose the information and does not change the pattern.</p>
+          </div>
+        </div>
+        <div class="figure figure--tall">Horror shift, one day two shifts</div>
+      </div>
+
+      <div class="case-row">
+        <div class="case-col">
+          <div class="case-block">
+            <p>Solving the roster once made it possible to solve it everywhere. The same logic and information hierarchy became the foundation for several other views across the app: the manager's roster, where instead of one employee's week you see the whole team's schedule side by side; open shifts, where employees can pick up available shifts and managers can assign them; and the shift editor, where managers can make adjustments directly from their phone, without going back to a desk. Moving a shift start by thirty minutes. Nudging a lunch break or changing it from the ground. The kind of change that used to require a computer now takes a few taps, because the underlying model was already there.</p>
+          </div>
+        </div>
+        <div class="figure">Manager's roster, open shifts, shift editor</div>
+      </div>
+
+      <div class="case-row">
+        <div class="case-col">
+          <div class="case-block">
+            <h2 class="case-h">Where it is now</h2>
+            <p>The design was delivered and handed off. Implementation is waiting on a platform migration. The prototype is built, in several variants, ready to go in front of users any minute.</p>
+            <p>The complexity didn't disappear. It just stopped being the user's problem. The same component holds a free day, a regular 9-to-5, and the most complicated shift imaginable with equal composure. The frame is solid enough to handle the full spectrum without breaking.</p>
+          </div>
+          <p class="case-quote case-quote--left">That's the fishing question, fully answered: &ldquo;Free this weekend, but back by Monday, because a request is still pending.&rdquo;</p>
+          <p class="case-tldr"><strong>TL;DR:</strong> &ldquo;Can I go fishing this weekend?&rdquo; used to take a spreadsheet, a headache, and a phone call to HR. Now it takes two seconds, because I turned a raw database dump into a calendar that also survives forklift-operator labor law. Solo. And I am even funny about it. <a href="contact.html">Let's talk!</a></p>
+        </div>
+        <div class="figure">Before &rarr; After</div>
+      </div>
+    </div>
+
+
+  </section>
+<nav class="case-nav">
+    <span class="case-nav-title">Continue reading</span>
+    <div class="case-nav-row">
+      <a class="case-nav-link" href="wip.html">&larr; One grid to rule them all</a>
+      <a class="case-nav-link case-nav-link--next" href="wip.html">Two editors, one shift &rarr;</a>
+    </div>
+  </nav>
+</main>
+
+<script src="site.js"></script>
+</body>
+</html>

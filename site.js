@@ -1,7 +1,7 @@
 // Typographic tidy-up: glue single-letter words to the next word so they
 // never sit alone at the end of a line.
 (function () {
-  var scope = document.querySelectorAll('.prose, .project-desc, .hero-text, .spoiler, .panel-title');
+  var scope = document.querySelectorAll('.prose, .project-desc, .hero-text, .spoiler, .panel-title, .case-intro, .case-block, .case-quote, .case-qa, .case-list, .case-tldr, .case-h, .case-nav');
   var re = /(^|[\s"'(\u2014\u2013\u201c\u201a])([a-zA-Z0-9])[ \t]+/g;
 
   scope.forEach(function (root) {
@@ -45,7 +45,7 @@
 
   var groups = [
     ['system builder,', 'fast failer,', 'user ombudsman.'],
-    ['complexity tamer,', 'friction killer,', 'accidental illustrator.'],
+    ['complexity tamer,', 'friction killer,', 'illustrator.'],
     ['problem framer,', 'edge case hunter,', 'words up-maker.'],
     ['flow finder,', 'cross-platform thinker,', 'whitespace guardian.'],
     ['pattern seeker,', 'pen-and-paper thinker,', 'horror shift survivor.']
