@@ -198,16 +198,12 @@ a:hover { color: var(--blue); }
 }
 
 .about-figure {
-  aspect-ratio: 3 / 4;
-  border: 1px solid var(--cream);
+  aspect-ratio: 5 / 7;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px;
-  text-align: center;
-  font-size: clamp(12px, 1vw, 14px);
-  line-height: 1.5;
-  opacity: 0.68;
+  overflow: hidden;
+  background: var(--cream);
 }
 
 .about-figure img {
@@ -215,6 +211,9 @@ a:hover { color: var(--blue); }
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: 50% 20%;
+  mix-blend-mode: multiply;
+  filter: grayscale(1) contrast(1.05);
 }
 
 /* ── Case study ────────────────────────────────────────────── */
@@ -327,6 +326,9 @@ a:hover { color: var(--blue); }
   position: relative;
 }
 .case-qa dd::before { content: '\2192'; position: absolute; left: 0; }
+
+.case-list a { color: var(--cream); }
+.case-list a:hover { color: var(--cream); opacity: 0.7; }
 
 .case-tldr {
   padding-top: clamp(16px, 2vw, 24px);
@@ -482,7 +484,7 @@ a:hover { color: var(--blue); }
 /* ── Responsive ────────────────────────────────────────────── */
 @media (max-width: 900px) {
   .about-grid { grid-template-columns: minmax(0, 1fr); }
-  .about-figure { aspect-ratio: 4 / 3; max-width: 480px; }
+  .about-figure { aspect-ratio: 5 / 6; max-width: 480px; }
   .case { grid-template-columns: minmax(0, 1fr); row-gap: clamp(28px, 5vw, 48px); }
   .figure { position: static; }
   .case-intro { max-width: 100%; }
