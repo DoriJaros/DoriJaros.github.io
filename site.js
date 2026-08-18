@@ -14,11 +14,95 @@
   });
 })();
 
+// Size the prototype iframe to its content so it never scrolls internally.
+(function () {
+  var frames = document.querySelectorAll('.proto-frame iframe, .cs-proto iframe');
+  if (!frames.length) return;
+  frames.forEach(function (f) {
+    function fit() {
+      try {
+        var d = f.contentDocument;
+        if (!d || !d.body) return;
+        var h = Math.max(d.body.scrollHeight, d.documentElement.scrollHeight);
+        var cap = Math.min(window.innerHeight * 0.82, 900);
+        if (h > 0) f.style.height = Math.min(h, cap) + 'px';
+      } catch (e) {}
+    }
+    f.addEventListener('load', function () { fit(); setTimeout(fit, 400); });
+    if (f.contentDocument && f.contentDocument.readyState === 'complete') fit();
+  });
+})();
+
+// Lightbox for case-study images.
+(function () {
+  var box = document.getElementById('lightbox');
+  if (!box) return;
+  var img = document.getElementById('lightbox-img');
+  var cap = document.getElementById('lightbox-cap');
+  var prev = box.querySelector('[data-lb="prev"]');
+  var next = box.querySelector('[data-lb="next"]');
+  var btns = Array.prototype.slice.call(document.querySelectorAll('.figure-btn, .cs-fig button'));
+  if (!btns.length) return;
+
+  var items = btns.map(function (b) {
+    var el = b.querySelector('img');
+    var fc = b.parentNode.querySelector('.figure-cap, .cs-cap');
+    var text = '';
+    if (fc) {
+      var c = fc.cloneNode(true);
+      var hint = c.querySelector('.figure-hint, b');
+      if (hint) hint.remove();
+      text = c.textContent.trim();
+    }
+    return { src: el.getAttribute('src'), alt: el.getAttribute('alt') || '', cap: text };
+  });
+  var i = 0;
+
+  function show(n) {
+    i = (n + items.length) % items.length;
+    img.src = items[i].src;
+    img.alt = items[i].alt;
+    cap.textContent = items[i].cap;
+    prev.hidden = next.hidden = items.length < 2;
+  }
+
+  function open(n) {
+    show(n);
+    box.hidden = false;
+    document.body.style.overflow = 'hidden';
+    box.querySelector('[data-lb="close"]').focus();
+  }
+
+  function close() {
+    box.hidden = true;
+    document.body.style.overflow = '';
+  }
+
+  btns.forEach(function (b, n) {
+    b.addEventListener('click', function () { open(n); });
+  });
+
+  box.addEventListener('click', function (e) {
+    var act = e.target.getAttribute && e.target.getAttribute('data-lb');
+    if (act === 'close') close();
+    else if (act === 'prev') show(i - 1);
+    else if (act === 'next') show(i + 1);
+    else if (e.target === box) close();
+  });
+
+  addEventListener('keydown', function (e) {
+    if (box.hidden) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') show(i - 1);
+    if (e.key === 'ArrowRight') show(i + 1);
+  });
+})();
+
 // App bar inverts to cream-on-blue while it overlaps a blue panel.
 (function () {
   var bar = document.querySelector('.bar');
   if (!bar) return;
-  var panels = Array.prototype.slice.call(document.querySelectorAll('.panel'));
+  var panels = Array.prototype.slice.call(document.querySelectorAll('.panel, .cs'));
   var raf = null;
 
   function update() {
