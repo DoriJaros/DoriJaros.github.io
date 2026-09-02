@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The roster roller coaster — Dorota Jarošová</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css?v=5">
+<style>
+.rr {
+  margin: 0;
+  background: var(--blue);
+  color: var(--cream);
+  padding: calc(var(--nav-h) + clamp(24px, 5vw, 64px)) var(--gutter) clamp(56px, 8vw, 112px);
+}
+.rr-inner { max-width: 1280px; margin: 0 auto; }
+
+.rr-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-size: clamp(36px, 6vw, 88px);
+  line-height: 1.04;
+  margin: 0 0 clamp(28px, 4vw, 56px);
+  text-wrap: balance;
+}
+
+/* Row: text left, one piece of media right. The media pins while its text passes. */
+.rr-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+  gap: clamp(32px, 5vw, 88px);
+  align-items: start;
+  margin-bottom: clamp(88px, 13vw, 200px);
+}
+.rr-row--solo { grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); }
+.rr-col { display: flex; flex-direction: column; gap: clamp(20px, 2.4vw, 34px); max-width: 62ch; }
+
+.rr-intro {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-size: clamp(18px, 1.9vw, 27px);
+  line-height: 1.42;
+  margin: 0;
+  max-width: 46ch;
+  text-wrap: pretty;
+}
+
+.rr-block h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: clamp(20px, 2.2vw, 32px);
+  line-height: 1.2;
+  margin: 0 0 16px;
+  text-wrap: balance;
+}
+.rr-block p {
+  font-size: clamp(15px, 1.3vw, 20px);
+  line-height: 1.6;
+  margin: 0 0 16px;
+  text-wrap: pretty;
+}
+.rr-block p:last-child { margin-bottom: 0; }
+
+.rr-quote {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-size: clamp(20px, 2.6vw, 36px);
+  line-height: 1.28;
+  padding: 8px 0 8px 24px;
+  border-left: 2px solid var(--cream);
+  margin: 0;
+  text-wrap: balance;
+}
+
+.rr-aside {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-size: clamp(17px, 1.8vw, 26px);
+  line-height: 1.34;
+  padding: 8px 0 8px 24px;
+  border-left: 2px solid var(--cream);
+  margin: 0;
+  text-wrap: pretty;
+}
+
+.rr-qa { margin: 0; }
+.rr-qa dt {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: clamp(16px, 1.6vw, 24px);
+  line-height: 1.32;
+  margin-top: 18px;
+}
+.rr-qa dt:first-child { margin-top: 0; }
+.rr-qa dd {
+  font-size: clamp(15px, 1.3vw, 20px);
+  line-height: 1.5;
+  margin: 4px 0 0;
+  padding-left: 20px;
+  position: relative;
+}
+.rr-qa dd::before { content: '\2192'; position: absolute; left: 0; }
+
+.rr .case-tldr { max-width: 62ch; }
+.rr .case-tldr a, .rr-cap a { color: var(--cream); }
+.rr .case-tldr a:hover, .rr-cap a:hover { opacity: 0.7; }
+
+.rr-meta {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-size: clamp(18px, 2vw, 28px);
+  line-height: 1.4;
+  opacity: 0.82;
+  margin: -14px 0 clamp(24px, 3.5vw, 44px);
+}
+
+/* Two prose-only sections in a row don't need the full media gap between them */
+.rr-row--tight { margin-bottom: clamp(32px, 4vw, 64px); }
+
+/* Media */
+/* Media never sizes the row: the text column owns row height, media rides an absolute track */
+.rr-row > .rr-fig { align-self: stretch; height: 100%; margin: 0; position: relative; }
+.rr-layer { position: absolute; inset: 0; }
+.rr-pin {
+  position: sticky;
+  top: calc(var(--nav-h) + clamp(16px, 3vw, 40px));
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+  transition: opacity 0.4s ease;
+  will-change: opacity;
+}
+.rr-pin button {
+  display: block; padding: 0; border: 0; background: none;
+  cursor: zoom-in; font: inherit; color: inherit; max-width: 100%;
+}
+.rr-pin img {
+  display: block; width: 100%; max-width: 100%;
+  max-height: min(62vh, 620px); height: auto;
+  object-fit: contain;
+}
+/* Tall portrait sketch: cap by height, let width follow */
+.rr-pin--tall img { width: auto; max-height: min(66vh, 660px); }
+
+/* The prototype brings its own phone frame. No wrapper, no background, just scaled to fit. */
+.rr-proto { position: relative; overflow: hidden; width: 406px; height: 862px; max-width: 100%; }
+.rr-proto iframe {
+  display: block; width: 406px; height: 862px;
+  border: 0; background: transparent;
+  transform-origin: top left;
+}
+
+.rr-wide { margin: clamp(48px, 7vw, 104px) 0; position: static; }
+.rr-wide .rr-layer { position: static; }
+.rr-wide .rr-pin { position: static; opacity: 1 !important; align-items: stretch; }
+.rr-wide img { width: 100%; max-width: 100%; max-height: none; }
+
+.rr-cap { font-size: clamp(12px, 1vw, 15px); line-height: 1.5; opacity: 0.8; text-wrap: pretty; }
+.rr-cap b { font-weight: 400; opacity: 0.7; }
+
+@media (max-width: 900px) {
+  .rr-row, .rr-row--solo { grid-template-columns: minmax(0, 1fr); gap: clamp(24px, 6vw, 40px); }
+  .rr-row > .rr-fig { height: auto; }
+  .rr-layer { position: static; }
+  .rr-pin { position: static; opacity: 1 !important; }
+  .rr-pin img { max-height: none; width: 100%; }
+
+  .rr-col { max-width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <a class="bar-name" href="index.html">Dorota Jarošová</a>
+  <nav class="bar-links">
+    <a href="index.html#work" aria-current="page">Work</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <article class="rr panel">
+   <div class="rr-inner">
+    <h1 class="rr-title">The roster roller coaster</h1>
+
+    <p class="rr-meta">AristoTelos Workforce Management System &middot; Mobile &middot; solo designer</p>
+
+    <div class="rr-row">
+      <div class="rr-col">
+        <p class="rr-intro">AristoTelos is a&nbsp;workforce management system used by thousands of employees and their managers in companies like Albert, T&#8209;Mobile, Innogy and Sconto. At its core is the roster, a&nbsp;personal work calendar. I&nbsp;inherited the old mobile app and rebuilt it from scratch, solo, end to end: research, IA, interaction design, spec.</p>
+
+        <div class="rr-block">
+          <h2>What I&nbsp;was given</h2>
+          <p>A&nbsp;raw data table. Information exported from a&nbsp;database and handed to a&nbsp;user with no further thought. The real problem wasn't&nbsp;the interface. The app was organized around how the system stores data, but ordinary employees don't&nbsp;care about data.</p>
+        </div>
+
+        <p class="rr-quote">&ldquo;Can we go fishing this weekend, or do you have to work?&rdquo;</p>
+
+        <div class="rr-block">
+          <p>Answering that should take two seconds. What users care about is their time in and outside of work. The moment you frame it that way, the real problem becomes obvious: the app had no concept of the person using it.</p>
+          <p>I&nbsp;reframed the whole thing around a&nbsp;single question: am I&nbsp;working, and what does my week look like? That made the day the primary unit, and suddenly the real design problems became visible.</p>
+        </div>
+      </div>
+
+      <figure class="rr-fig">
+        <div class="rr-layer"><div class="rr-pin">
+          <div class="rr-proto"><iframe scrolling="no" src="prototype/roster-regular.html" title="Interactive prototype of a regular roster"></iframe></div>
+          <figcaption class="rr-cap">Clickable prototype of a regular roster. <a href="prototype/roster-regular.html" target="_blank" rel="noopener">Open full screen &rarr;</a></figcaption>
+        </div></div>
+      </figure>
+    </div>
+
+    <div class="rr-row">
+      <div class="rr-col">
+        <div class="rr-block">
+          <h2>Turns out, a&nbsp;day at work is complicated</h2>
+          <p>A&nbsp;shift isn't&nbsp;just a&nbsp;block of time. It carries activities, parallel activities, mandatory and flexible breaks, multiple absence types, with meaningful differences between them that payroll absolutely cares about. Pending requests, approved ones, denied ones, manager notes, labels, legal warnings.</p>
+          <p>The user base runs the full spectrum: HR managers on one end, warehouse workers opening a&nbsp;work app for the first time on the other. The design had to work for both.</p>
+        </div>
+        <div class="rr-block">
+          <h2>The goal</h2>
+          <p>Give people a&nbsp;calendar. Something they can open and scan in seconds. At the same time, keep the roster as a&nbsp;reliable source of truth, where users can find everything about their shifts when they need to go deep.</p>
+        </div>
+      </div>
+
+      <figure class="rr-fig">
+        <div class="rr-layer"><div class="rr-pin">
+          <div class="rr-proto">
+            <iframe scrolling="no" src="prototype/horror-shift.html" title="Interactive prototype of a horror shift"></iframe>
+          </div>
+          <figcaption class="rr-cap">Day one is the horror shift: every layer a legal day can carry at once, and very unlikely to ever happen. <a href="prototype/horror-shift.html" target="_blank" rel="noopener">Open it, if you're not scared &rarr;</a></figcaption>
+        </div></div>
+      </figure>
+    </div>
+
+    <div class="rr-row">
+      <div class="rr-col">
+        <div class="rr-block">
+          <h2>The process</h2>
+          <p>I&nbsp;mapped everything a&nbsp;single shift could possibly contain. Found shifts whose composition was worse than your worst nightmare and designed for those first. Setting priorities was the key: what does a&nbsp;person actually need to see at a&nbsp;glance, and what can wait until they ask for it?</p>
+        </div>
+        <p class="rr-aside">Fun fact: forklift operators are legally required to take a&nbsp;five-minute break every thirty minutes, no&nbsp;exceptions.</p>
+        <div class="rr-block">
+          <p>And that broke the timeline. Shifts with parallel activities and five-minute breaks recurring hourly throughout the day made a&nbsp;conventional timeline unreadable: too dense to scan, and too fragile to scale.</p>
+        </div>
+      </div>
+
+      <figure class="rr-fig">
+        <div class="rr-layer"><div class="rr-pin rr-pin--tall">
+          <button type="button">
+            <img src="img/timeline-fail.jpg" alt="Why a conventional timeline fails for a dense shift">
+          </button>
+          <figcaption class="rr-cap">Why the timeline failed: parallel activities and five-minute breaks stacked on one axis, unreadable at a glance. <b>Click to enlarge</b></figcaption>
+        </div></div>
+      </figure>
+    </div>
+
+    <div class="rr-row rr-row--solo">
+      <div class="rr-col">
+        <div class="rr-block">
+          <h2>The solution</h2>
+          <p>Hide the complexity, keep it for later, highlight the time aspect users understand and need. So the day, the main unit, became the main component. It has two states.</p>
+          <p><strong>Collapsed</strong>, for scanning the whole month. On the left, a&nbsp;calendar for orientation in time: date, day of week, holidays highlighted. Same for everyone. On the right, the essentials: when you work, what you'll be doing, absences, total hours. Plus a&nbsp;signal when something needs attention, so you can tell a&nbsp;shift you've worked a&nbsp;thousand times apart from one that isn't&nbsp;routine. Enough to orient. Not enough to overwhelm.</p>
+          <p><strong>Expanded</strong> holds everything a&nbsp;shift can contain: properties, tags, manager notes, requests, the full schedule. There when you need to go deeper, invisible when you don't.</p>
+        </div>
+      </div>
+      <div></div>
+    </div>
+
+    <figure class="rr-fig rr-wide">
+        <div class="rr-layer"><div class="rr-pin">
+        <button type="button">
+          <img src="img/day-item-explained.jpg" alt="Day item explained: collapsed and expanded states of the roster day component">
+        </button>
+        <figcaption class="rr-cap">Day item, explained: what the collapsed row carries, and what opens underneath it. <b>Click to enlarge</b></figcaption>
+      </div></div>
+      </figure>
+
+    <div class="rr-row rr-row--solo rr-row--tight">
+      <div class="rr-col">
+        <div class="rr-block">
+          <p>When the timeline failed, content categories emerged from how users actually think about their time:</p>
+        </div>
+
+        <dl class="rr-qa">
+          <dt>When do I&nbsp;work and when don't&nbsp;I?</dt>
+          <dd>Day flow: main activities, breaks, absences.</dd>
+          <dt>Do I&nbsp;have anything extra to do?</dt>
+          <dd>Parallel activities.</dd>
+          <dt>Am I&nbsp;working more than usual?</dt>
+          <dd>Overtime.</dd>
+          <dt>Anything else?</dt>
+          <dd>Labels, most commonly home office.</dd>
+        </dl>
+
+        <div class="rr-block">
+          <p>That hierarchy became the backbone of the visual solution. And while a&nbsp;regular roster looks like the one above, this structure is built to hold even horror shifts.</p>
+          <p>The roster isn't&nbsp;read-only. From any shift, an employee can raise a&nbsp;request, offer it for swap to a&nbsp;fellow coworker, or leave a&nbsp;note for a&nbsp;manager. A&nbsp;floating action button extends the same actions to date ranges, so a&nbsp;five-day vacation takes setting up one request instead of five.</p>
+          <p>Attendance state is also reflected. Closed attendance, in the past: shifts that have already happened and can't&nbsp;be changed, though in some companies employees are still required to review and confirm them before payroll is processed. Open attendance, the current period, live and actionable. Unpublished attendance, in the future: shifts prescribed according to rules, suggestions rather than commitments, placed before final planning happens. The same component looks different depending on which state it's&nbsp;in, but does not lose the information and does not change the pattern.</p>
+          <p>This hierarchy is the result of internal testing on an early prototype with basic data. Absences were previously shown as chips attached to the top of roster items &mdash; not clear enough, breaking the visual rhythm, and not eye-catching enough for information as important as an&nbsp;upcoming vacation. The spot absences occupy now was previously taken by labels, which sit clearly lower in the information hierarchy than what deserves such a&nbsp;permanent place.</p>
+        </div>
+      </div>
+
+      <div></div>
+    </div>
+
+    <div class="rr-row rr-row--solo">
+      <div class="rr-col">
+        <div class="rr-block">
+          <p>Solving the roster once made it possible to solve it everywhere. The same logic and information hierarchy became the foundation for several other views across the app: the manager's&nbsp;roster, where instead of one employee's&nbsp;week you see the whole team's&nbsp;schedule side by side; open shifts, where employees can pick up available shifts and managers can assign them; and the shift editor, where managers can make adjustments directly from their phone, without going back to a&nbsp;desk. Moving a&nbsp;shift start by thirty minutes. Nudging a&nbsp;lunch break or changing it from the ground. The kind of change that used to require a&nbsp;computer now takes a&nbsp;few taps, because the underlying model was already there.</p>
+        </div>
+
+        <div class="rr-block">
+          <h2>Where it is now</h2>
+          <p>The design was delivered and handed off. Implementation is waiting on a&nbsp;platform migration.</p>
+          <p>The complexity didn't&nbsp;disappear. It just stopped being the user's&nbsp;problem. The same component holds a&nbsp;free day, a&nbsp;regular 9-to-5, and the most complicated shift imaginable with equal composure. The frame is solid enough to handle the full spectrum without breaking.</p>
+        </div>
+
+        <p class="rr-quote">That's&nbsp;the fishing question, fully answered: &ldquo;Free this weekend, but back by Monday, because a&nbsp;request is still pending.&rdquo;</p>
+
+        <p class="case-tldr"><strong>TL;DR:</strong> &ldquo;Can I&nbsp;go fishing this weekend?&rdquo; used to take a&nbsp;spreadsheet, a&nbsp;headache, and a&nbsp;phone call to HR. Now it takes two seconds, because I&nbsp;turned a&nbsp;raw database dump into a&nbsp;calendar that also survives forklift-operator labor law. Solo. And I&nbsp;am even funny about it. <a href="contact.html">Let's&nbsp;talk!</a></p>
+      </div>
+      <div></div>
+    </div>
+   </div>
+  </article>
+
+  <nav class="case-nav">
+    <span class="case-nav-title">Continue reading</span>
+    <div class="case-nav-row">
+      <a class="case-nav-link" href="wip.html">&larr; One grid to rule them all</a>
+      <a class="case-nav-link case-nav-link--next" href="case-editors.html">Two editors, one shift &rarr;</a>
+    </div>
+  </nav>
+</main>
+
+<div class="lightbox" id="lightbox" hidden>
+  <button class="lightbox-close" type="button" data-lb="close" aria-label="Close">&times;</button>
+  <button class="lightbox-nav lightbox-prev" type="button" data-lb="prev" aria-label="Previous image">&larr;</button>
+  <img class="lightbox-img" id="lightbox-img" alt="">
+  <button class="lightbox-nav lightbox-next" type="button" data-lb="next" aria-label="Next image">&rarr;</button>
+  <span class="lightbox-cap" id="lightbox-cap"></span>
+</div>
+
+<script src="site.js?v=5"></script>
+<script>
+(function () {
+  var W = 406, H = 862;                       // prototype design box == the phone frame itself
+  var rows = [].slice.call(document.querySelectorAll('.rr-row'));
+  var narrow = function () { return window.matchMedia('(max-width: 900px)').matches; };
+
+  function clean(f) {
+    try {
+      var d = f.contentDocument;
+      if (!d || !d.body) return;
+      var s = d.getElementById('rr-embed') || d.head.appendChild(d.createElement('style'));
+      s.id = 'rr-embed';
+      s.textContent = 'html,body{background:transparent!important;min-height:0!important;overflow:hidden!important;}'
+        + '#dc-root,#dc-root>.sc-host,#dc-root>.sc-host>div{background:transparent!important;box-shadow:none!important;}'
+        + '#dc-root>.sc-host>div{padding:0!important;margin:0!important;min-height:0!important;height:auto!important;}';
+    } catch (e) {}
+  }
+  [].slice.call(document.querySelectorAll('.rr-proto iframe')).forEach(function (f) {
+    f.addEventListener('load', function () { clean(f); setTimeout(function () { clean(f); }, 600); });
+    if (f.contentDocument && f.contentDocument.readyState === 'complete') clean(f);
+  });
+
+  // Each figure is clamped by its own row's text height, so it always has sticky travel.
+  function layout() {
+    var vh = window.innerHeight;
+    rows.forEach(function (row) {
+      var pin = row.querySelector('.rr-pin');
+      if (!pin) return;
+      var col = row.querySelector('.rr-col');
+      var cell = row.querySelector('.rr-fig');
+      var cap = row.querySelector('.rr-cap');
+      var capH = cap ? cap.offsetHeight + 12 : 0;
+      var box = pin.querySelector('.rr-proto');
+      var img = pin.querySelector('img');
+
+      if (narrow()) {
+        if (img) img.style.maxHeight = '';
+        if (box) {
+          var s0 = Math.min(1, (cell.clientWidth || W) / W);
+          box.querySelector('iframe').style.transform = 'scale(' + s0 + ')';
+          box.style.width = (W * s0) + 'px';
+          box.style.height = (H * s0) + 'px';
+        }
+        return;
+      }
+
+      // Media is sized by the real space between the sticky offset and the viewport bottom.
+      var top = parseFloat(getComputedStyle(pin).top) || 100;
+      var media = Math.max(300, vh - top - capH - 16);
+      if (img) img.style.maxHeight = (pin.classList.contains('rr-pin--tall') ? media * 0.72 : media) + 'px';
+      if (box) {
+        var scale = Math.min(1, media / H, (cell.clientWidth || W) / W);
+        box.querySelector('iframe').style.transform = 'scale(' + scale + ')';
+        box.style.width = (W * scale) + 'px';
+        box.style.height = (H * scale) + 'px';
+      }
+      // Short sections get extra room so the pin always has travel.
+      row.style.minHeight = '';
+      var pinH = pin.offsetHeight;
+      row.style.minHeight = (pinH + 240) + 'px';
+    });
+  }
+
+  // One media element on screen at a time: fade out as its section ends.
+  function fade() {
+    if (narrow()) return;
+    var vh = window.innerHeight;
+    rows.forEach(function (row) {
+      var pin = row.querySelector('.rr-pin');
+      if (!pin) return;
+      var r = row.getBoundingClientRect();
+      var win = Math.min(vh * 0.22, 180, Math.max(70, r.height / 3.2));
+      var inOp = Math.min(1, Math.max(0, (vh - r.top) / win));
+      var outOp = Math.min(1, Math.max(0, r.bottom / win));
+      pin.style.opacity = Math.min(inOp, outOp).toFixed(3);
+    });
+  }
+
+  var raf = null;
+  function onScroll() { if (raf === null) raf = requestAnimationFrame(function () { raf = null; fade(); }); }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', function () { layout(); fade(); });
+  window.addEventListener('load', function () { layout(); fade(); });
+  [].slice.call(document.querySelectorAll('.rr-proto iframe')).forEach(function (f) {
+    f.addEventListener('load', function () { layout(); fade(); });
+  });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { layout(); fade(); });
+  layout(); fade();
+})();
+</script>
+</body>
+</html>
