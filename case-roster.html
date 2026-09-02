@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Roster Roller Coaster — Dorota Jarošová</title>
+<title>The roster roller coaster — Dorota Jarošová</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="site.css?v=4">
+<link rel="stylesheet" href="site.css?v=5">
 <style>
 .rr {
   margin: 0;
@@ -20,7 +20,7 @@
 .rr-title {
   font-family: 'Fraunces', serif;
   font-weight: 300;
-  font-size: clamp(38px, 6vw, 92px);
+  font-size: clamp(36px, 6vw, 88px);
   line-height: 1.04;
   margin: 0 0 clamp(28px, 4vw, 56px);
   text-wrap: balance;
@@ -43,21 +43,22 @@
   font-size: clamp(18px, 1.9vw, 27px);
   line-height: 1.42;
   margin: 0;
+  max-width: 46ch;
   text-wrap: pretty;
 }
 
 .rr-block h2 {
   font-family: 'Fraunces', serif;
   font-weight: 600;
-  font-size: clamp(20px, 2.1vw, 30px);
+  font-size: clamp(20px, 2.2vw, 32px);
   line-height: 1.2;
-  margin: 0 0 14px;
+  margin: 0 0 16px;
   text-wrap: balance;
 }
 .rr-block p {
-  font-size: clamp(15px, 1.15vw, 18px);
-  line-height: 1.62;
-  margin: 0 0 14px;
+  font-size: clamp(15px, 1.3vw, 20px);
+  line-height: 1.6;
+  margin: 0 0 16px;
   text-wrap: pretty;
 }
 .rr-block p:last-child { margin-bottom: 0; }
@@ -65,9 +66,9 @@
 .rr-quote {
   font-family: 'Fraunces', serif;
   font-weight: 300;
-  font-size: clamp(20px, 2.3vw, 33px);
+  font-size: clamp(20px, 2.6vw, 36px);
   line-height: 1.28;
-  padding: 4px 0 4px 22px;
+  padding: 8px 0 8px 24px;
   border-left: 2px solid var(--cream);
   margin: 0;
   text-wrap: balance;
@@ -76,8 +77,10 @@
 .rr-aside {
   font-family: 'Fraunces', serif;
   font-weight: 300;
-  font-size: clamp(17px, 1.7vw, 24px);
+  font-size: clamp(17px, 1.8vw, 26px);
   line-height: 1.34;
+  padding: 8px 0 8px 24px;
+  border-left: 2px solid var(--cream);
   margin: 0;
   text-wrap: pretty;
 }
@@ -86,13 +89,13 @@
 .rr-qa dt {
   font-family: 'Fraunces', serif;
   font-weight: 600;
-  font-size: clamp(16px, 1.5vw, 22px);
+  font-size: clamp(16px, 1.6vw, 24px);
   line-height: 1.32;
   margin-top: 18px;
 }
 .rr-qa dt:first-child { margin-top: 0; }
 .rr-qa dd {
-  font-size: clamp(15px, 1.15vw, 18px);
+  font-size: clamp(15px, 1.3vw, 20px);
   line-height: 1.5;
   margin: 4px 0 0;
   padding-left: 20px;
@@ -100,9 +103,21 @@
 }
 .rr-qa dd::before { content: '\2192'; position: absolute; left: 0; }
 
-.rr-tldr { font-size: clamp(15px, 1.15vw, 18px); line-height: 1.62; margin: 0; text-wrap: pretty; }
-.rr-tldr a, .rr-cap a { color: var(--cream); }
-.rr-tldr a:hover, .rr-cap a:hover { opacity: 0.7; }
+.rr .case-tldr { max-width: 62ch; }
+.rr .case-tldr a, .rr-cap a { color: var(--cream); }
+.rr .case-tldr a:hover, .rr-cap a:hover { opacity: 0.7; }
+
+.rr-meta {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-size: clamp(18px, 2vw, 28px);
+  line-height: 1.4;
+  opacity: 0.82;
+  margin: -14px 0 clamp(24px, 3.5vw, 44px);
+}
+
+/* Two prose-only sections in a row don't need the full media gap between them */
+.rr-row--tight { margin-bottom: clamp(32px, 4vw, 64px); }
 
 /* Media */
 /* Media never sizes the row: the text column owns row height, media rides an absolute track */
@@ -143,7 +158,7 @@
 .rr-wide .rr-pin { position: static; opacity: 1 !important; align-items: stretch; }
 .rr-wide img { width: 100%; max-width: 100%; max-height: none; }
 
-.rr-cap { font-size: clamp(12px, 0.9vw, 14px); line-height: 1.5; opacity: 0.8; text-wrap: pretty; }
+.rr-cap { font-size: clamp(12px, 1vw, 15px); line-height: 1.5; opacity: 0.8; text-wrap: pretty; }
 .rr-cap b { font-weight: 400; opacity: 0.7; }
 
 @media (max-width: 900px) {
@@ -171,7 +186,9 @@
 <main>
   <article class="rr panel">
    <div class="rr-inner">
-    <h1 class="rr-title">The Roster Roller Coaster</h1>
+    <h1 class="rr-title">The roster roller coaster</h1>
+
+    <p class="rr-meta">AristoTelos Workforce Management System &middot; Mobile &middot; solo designer</p>
 
     <div class="rr-row">
       <div class="rr-col">
@@ -264,7 +281,7 @@
       </div></div>
       </figure>
 
-    <div class="rr-row rr-row--solo">
+    <div class="rr-row rr-row--solo rr-row--tight">
       <div class="rr-col">
         <div class="rr-block">
           <p>When the timeline failed, content categories emerged from how users actually think about their time:</p>
@@ -285,6 +302,7 @@
           <p>That hierarchy became the backbone of the visual solution. And while a&nbsp;regular roster looks like the one above, this structure is built to hold even horror shifts.</p>
           <p>The roster isn't&nbsp;read-only. From any shift, an employee can raise a&nbsp;request, offer it for swap to a&nbsp;fellow coworker, or leave a&nbsp;note for a&nbsp;manager. A&nbsp;floating action button extends the same actions to date ranges, so a&nbsp;five-day vacation takes setting up one request instead of five.</p>
           <p>Attendance state is also reflected. Closed attendance, in the past: shifts that have already happened and can't&nbsp;be changed, though in some companies employees are still required to review and confirm them before payroll is processed. Open attendance, the current period, live and actionable. Unpublished attendance, in the future: shifts prescribed according to rules, suggestions rather than commitments, placed before final planning happens. The same component looks different depending on which state it's&nbsp;in, but does not lose the information and does not change the pattern.</p>
+          <p>This hierarchy is the result of internal testing on an early prototype with basic data. Absences were previously shown as chips attached to the top of roster items &mdash; not clear enough, breaking the visual rhythm, and not eye-catching enough for information as important as an&nbsp;upcoming vacation. The spot absences occupy now was previously taken by labels, which sit clearly lower in the information hierarchy than what deserves such a&nbsp;permanent place.</p>
         </div>
       </div>
 
@@ -299,13 +317,13 @@
 
         <div class="rr-block">
           <h2>Where it is now</h2>
-          <p>The design was delivered and handed off. Implementation is waiting on a&nbsp;platform migration. The prototype is built, in several variants, ready to go in front of users any minute.</p>
+          <p>The design was delivered and handed off. Implementation is waiting on a&nbsp;platform migration.</p>
           <p>The complexity didn't&nbsp;disappear. It just stopped being the user's&nbsp;problem. The same component holds a&nbsp;free day, a&nbsp;regular 9-to-5, and the most complicated shift imaginable with equal composure. The frame is solid enough to handle the full spectrum without breaking.</p>
         </div>
 
         <p class="rr-quote">That's&nbsp;the fishing question, fully answered: &ldquo;Free this weekend, but back by Monday, because a&nbsp;request is still pending.&rdquo;</p>
 
-        <p class="rr-tldr"><strong>TL;DR:</strong> &ldquo;Can I&nbsp;go fishing this weekend?&rdquo; used to take a&nbsp;spreadsheet, a&nbsp;headache, and a&nbsp;phone call to HR. Now it takes two seconds, because I&nbsp;turned a&nbsp;raw database dump into a&nbsp;calendar that also survives forklift-operator labor law. Solo. And I&nbsp;am even funny about it. <a href="contact.html">Let's&nbsp;talk!</a></p>
+        <p class="case-tldr"><strong>TL;DR:</strong> &ldquo;Can I&nbsp;go fishing this weekend?&rdquo; used to take a&nbsp;spreadsheet, a&nbsp;headache, and a&nbsp;phone call to HR. Now it takes two seconds, because I&nbsp;turned a&nbsp;raw database dump into a&nbsp;calendar that also survives forklift-operator labor law. Solo. And I&nbsp;am even funny about it. <a href="contact.html">Let's&nbsp;talk!</a></p>
       </div>
       <div></div>
     </div>
@@ -329,7 +347,7 @@
   <span class="lightbox-cap" id="lightbox-cap"></span>
 </div>
 
-<script src="site.js?v=4"></script>
+<script src="site.js?v=5"></script>
 <script>
 (function () {
   var W = 406, H = 862;                       // prototype design box == the phone frame itself

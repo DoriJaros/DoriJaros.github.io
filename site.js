@@ -41,12 +41,12 @@
   var cap = document.getElementById('lightbox-cap');
   var prev = box.querySelector('[data-lb="prev"]');
   var next = box.querySelector('[data-lb="next"]');
-  var btns = Array.prototype.slice.call(document.querySelectorAll('.figure-btn, .cs-fig button'));
+  var btns = Array.prototype.slice.call(document.querySelectorAll('.figure-btn, .cs-fig button, .rr-pin button'));
   if (!btns.length) return;
 
   var items = btns.map(function (b) {
     var el = b.querySelector('img');
-    var fc = b.parentNode.querySelector('.figure-cap, .cs-cap');
+    var fc = b.parentNode.querySelector('.figure-cap, .cs-cap, .rr-cap');
     var text = '';
     if (fc) {
       var c = fc.cloneNode(true);
@@ -130,6 +130,7 @@
   var groups = [
     ['system builder,', 'fast failer,', 'user ombudsman.'],
     ['complexity tamer,', 'friction killer,', 'illustrator.'],
+    ['Figma fairy,', 'Claude commander,', 'Affinity alchemist.'],
     ['problem framer,', 'edge case hunter,', 'words up-maker.'],
     ['flow finder,', 'cross-platform thinker,', 'whitespace guardian.'],
     ['pattern seeker,', 'pen-and-paper thinker,', 'horror shift survivor.']

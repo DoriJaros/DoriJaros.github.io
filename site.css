@@ -448,6 +448,7 @@ a:hover { color: var(--blue); }
 }
 .figure-cap a { color: var(--cream); }
 .figure-cap a:hover { color: var(--cream); opacity: 0.7; }
+.figure-cap b { font-weight: 400; opacity: 0.7; }
 
 .figure-badge {
   align-self: flex-start;
@@ -559,6 +560,7 @@ a:hover { color: var(--blue); }
 .contact-center {
   flex: 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: clamp(48px, 12vh, 160px) 0;
@@ -588,6 +590,18 @@ a:hover { color: var(--blue); }
   transition: width 320ms linear;
 }
 .contact-link:hover::after { width: 100%; }
+
+.contact-secondary {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-size: clamp(20px, 2.4vw, 36px);
+  line-height: 1.32;
+  text-align: center;
+  opacity: 0.72;
+  margin: clamp(18px, 2.4vw, 32px) 0 0;
+}
+.contact-secondary a { color: var(--cream); text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 2px; }
+.contact-secondary a:hover { opacity: 0.7; }
 
 .spoiler {
   font-family: 'Fraunces', serif;

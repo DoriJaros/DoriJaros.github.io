@@ -7,14 +7,34 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="site.css?v=3">
+<link rel="stylesheet" href="site.css?v=5">
+<style>
+/* Full-width media inside the case column flow */
+.case-full { display: flex; flex-direction: column; gap: 12px; align-items: stretch; }
+.case-full .figure-btn { width: 100%; }
+.case-full .figure-btn img { width: 100%; max-width: 100%; height: auto; }
+.case-full .figure-cap { max-width: 72ch; }
+
+.proto-wide {
+  width: 100%;
+  background: var(--cream);
+  overflow: hidden;
+}
+.proto-wide iframe {
+  display: block;
+  width: 100%;
+  height: 220px;
+  border: 0;
+  background: var(--cream);
+}
+</style>
 </head>
 <body>
 
 <header class="bar">
   <a class="bar-name" href="index.html">Dorota Jarošová</a>
   <nav class="bar-links">
-    <a href="index.html#work">Work</a>
+    <a href="index.html#work" aria-current="page">Work</a>
     <a href="about.html">About</a>
     <a href="contact.html">Contact</a>
   </nav>
@@ -49,8 +69,12 @@
             <p>So the timeline became the editor. The form is still there, for when you need to be exact to the minute, change the type, add or remove a part.</p>
           </div>
         </div>
-        <div class="figure figure--tall">Web editor: form vs. direct manipulation</div>
       </div>
+
+      <figure class="case-full">
+        <div class="proto-wide"><iframe scrolling="no" src="prototype/shift-editor-web.html" title="Interactive prototype of the web shift editor"></iframe></div>
+        <figcaption class="figure-cap">Clickable prototype of the web editor: drag a part to move it, pull its edge to change its length. <a href="prototype/shift-editor-web.html" target="_blank" rel="noopener">Open full screen &rarr;</a></figcaption>
+      </figure>
 
       <div class="case-row">
         <div class="case-col">
@@ -74,7 +98,6 @@
             <p>Depth wasn't only about clarity. The shift view had to stay narrow, because managers open several at once to compare them and copy parts between them. The extra information couldn't cost extra height.</p>
           </div>
         </div>
-        <div class="figure figure--tall">Depth: the layers of a shift</div>
       </div>
 
       <div class="case-row">
@@ -83,14 +106,31 @@
             <h2 class="case-h">How I got there</h2>
             <p>Four versions, each answering the same question differently: which parts of a shift are objects, and which are conditions.</p>
             <p>I picked the one that really shows the rules. If a layout lets you draw a shift that can't legally exist, sooner or later someone will try to save one.</p>
+          </div>
+        </div>
+      </div>
+
+      <figure class="case-full">
+        <button class="figure-btn" type="button">
+          <img src="img/web-editor-options.jpg" alt="Four layout options for the web shift editor, each with annotations">
+        </button>
+        <figcaption class="figure-cap">Working through the layers logic: four options, each drawing the same shift under a different set of rules about what is an object and what is a condition. <b>Click to enlarge</b></figcaption>
+      </figure>
+
+      <div class="case-row">
+        <div class="case-col">
+          <div class="case-block">
             <p>One shift can carry every layer at once: absence, activities, breaks, parallel activities, overtime and labels, all in one day. Rare, but legal. I call it a horror shift, and I designed against it on purpose: an editor that survives the worst thing the rules allow doesn't need a special handling for the regular shifts of ordinary Martas.</p>
           </div>
         </div>
-        <div class="case-col">
-          <div class="figure">Four iterations with annotations</div>
-          <div class="figure">Horror shift vs. most basic shift</div>
-        </div>
       </div>
+
+      <figure class="case-full">
+        <button class="figure-btn" type="button">
+          <img src="img/web-horror-shift.jpg" alt="The horror shift drawn in the web editor: every layer a legal day can carry, at once">
+        </button>
+        <figcaption class="figure-cap">The horror shift on the web timeline: absence, activities, breaks, three parallel activities, overtime and labels, all in one day. <b>Click to enlarge</b></figcaption>
+      </figure>
 
       <div class="case-row">
         <div class="case-col">
@@ -101,12 +141,7 @@
             <p>It shows the model correctly but it is not interactive, yet.</p>
             <p>The editor was driven from this view. The same move as on web, where the timeline that displayed the shift became the timeline that edits it. Managers don't learn a second layout, they learn a button and the designer doesn't have to invent one either.</p>
           </div>
-        </div>
-        <div class="figure figure--tall">Shift detail as columns</div>
-      </div>
 
-      <div class="case-row">
-        <div class="case-col">
           <div class="case-block">
             <p>Edit mode. Select a shift, press edit button, visible only to people with the rights to use it and every shift part becomes interactive. Pressing a part opens its form in the lower half of the screen. The part stays selected and the shift stays visible above it, so you can see what you are changing and what it sits between.</p>
             <p>Move lunch to 11:30, save. The afternoon activity stretches into the gap. One part edited, the rest adjusted automatically.</p>
@@ -115,10 +150,6 @@
             <p>This way managers can adjust shifts wherever they happen to be with their smartphones.</p>
           </div>
         </div>
-        <div class="case-col">
-          <div class="figure figure--tall">Edit mode: part selected, form below</div>
-          <div class="figure">Removing a part</div>
-        </div>
       </div>
 
       <div class="case-row">
@@ -126,19 +157,11 @@
           <div class="case-block">
             <h2 class="case-h">Where it is now</h2>
             <p>Unfortunately, no usability data on any of this, just company internal evaluation of what represents the business rules right and what is doable.</p>
-            <p>Web editor is in use, mobile app design finished and handed over. When it ships is not in my hands.</p>
+            <p>The web editor was implemented shortly after my proposal &mdash; and prioritised highly enough to ship into the legacy version, not just the upcoming platform. The mobile app is in development.</p>
           </div>
 
-          <div class="case-tldr">
-            <h2 class="case-h">TL;DR</h2>
-            <ul class="case-list">
-              <li>One shift model, made legible twice. As depth on the web, as columns on a phone.</li>
-              <li>Marta gets her lunch at 11:30 (Spoiler: Rodrigo wakes from the coma and learns the twins aren't his.)</li>
-              <li>Dori is a great designer and you want to hire her. <a href="contact.html">Let's talk!</a></li>
-            </ul>
-          </div>
+          <p class="case-tldr"><strong>TL;DR:</strong> One shift model, made legible twice. As depth on the web, as columns on a phone. Marta gets her lunch at 11:30 (Spoiler: Rodrigo wakes from the coma and learns the twins aren't his.) Dori is a great designer and you want to hire her. <a href="contact.html">Let's talk!</a></p>
         </div>
-        <div class="figure">Web and mobile, side by side</div>
       </div>
     </div>
   </section>
@@ -146,12 +169,48 @@
   <nav class="case-nav">
     <span class="case-nav-title">Continue reading</span>
     <div class="case-nav-row">
-      <a class="case-nav-link" href="case-roster.html">&larr; The roster roller-coaster</a>
+      <a class="case-nav-link" href="case-roster.html">&larr; The roster roller coaster</a>
       <a class="case-nav-link case-nav-link--next" href="wip.html">One grid to rule them all &rarr;</a>
     </div>
   </nav>
 </main>
 
-<script src="site.js?v=3"></script>
+<div class="lightbox" id="lightbox" hidden>
+  <button class="lightbox-close" type="button" data-lb="close" aria-label="Close">&times;</button>
+  <button class="lightbox-nav lightbox-prev" type="button" data-lb="prev" aria-label="Previous image">&larr;</button>
+  <img class="lightbox-img" id="lightbox-img" alt="">
+  <button class="lightbox-nav lightbox-next" type="button" data-lb="next" aria-label="Next image">&rarr;</button>
+  <span class="lightbox-cap" id="lightbox-cap"></span>
+</div>
+
+<script src="site.js?v=5"></script>
+<script>
+/* The web prototype is a standalone bundle: strip its full-height centering
+   and size the iframe to the content it actually draws. */
+(function () {
+  var frames = [].slice.call(document.querySelectorAll('.proto-wide iframe'));
+  if (!frames.length) return;
+
+  function fit(f) {
+    try {
+      var d = f.contentDocument;
+      if (!d || !d.body) return;
+      var s = d.getElementById('pw-embed') || d.head.appendChild(d.createElement('style'));
+      s.id = 'pw-embed';
+      s.textContent = 'html,body{min-height:0!important;height:auto!important;display:block!important;overflow:hidden!important;margin:0!important;}'
+        + '#__bundler_thumbnail,#__bundler_loading,#__bundler_placeholder{display:none!important;}';
+      var first = d.body.firstElementChild;
+      var h = Math.max(d.body.scrollHeight, first ? Math.ceil(first.getBoundingClientRect().height) : 0);
+      if (h > 40) f.style.height = Math.min(h + 8, Math.round(window.innerHeight * 0.9)) + 'px';
+    } catch (e) {}
+  }
+
+  frames.forEach(function (f) {
+    f.addEventListener('load', function () { fit(f); setTimeout(function () { fit(f); }, 500); setTimeout(function () { fit(f); }, 1400); });
+    if (f.contentDocument && f.contentDocument.readyState === 'complete') fit(f);
+  });
+  window.addEventListener('resize', function () { frames.forEach(fit); });
+})();
+</script>
 </body>
 </html>
